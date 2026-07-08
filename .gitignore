@@ -1,0 +1,8 @@
+# OS / editor cruft
+.DS_Store
+*.swp
+*~
+
+# Generated handoff artifacts (don't commit test output)
+HANDOFF.md
+handoffs/
