@@ -62,8 +62,8 @@ Redact secrets (API keys, passwords, tokens, PII).
 - ❓ <需要用户回答才能继续的问题>；未答之前用 <默认假设> 兜底。
 
 ## 11. 恢复记忆入口 Memory & references
-- 建议调用的 skills / Suggested skills: <如 mem-search、learn-codebase、collab…>
-- 记忆索引: `~/.claude/projects/-Users-iverson/memory/MEMORY.md` 中相关条目 <列名>
+- 建议调用的 skills / Suggested skills: <如 mem-search、learn-codebase…>
+- 记忆入口 / Memory: <你运行时的记忆——Claude Code: auto-memory 索引 (MEMORY.md) / mem-search；Codex: AGENTS.md、~/.codex> 中相关条目 <列名>
 - 相关产物: <plan / PR / issue / ADR 路径或 URL>
 
 ---

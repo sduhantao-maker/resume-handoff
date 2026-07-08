@@ -45,7 +45,7 @@ Run this the first time you checkpoint, then re-run the relevant steps on each r
    # (the skill loader prints its base dir; default install: ~/.claude/skills/resume-handoff/)
    ./save-handoff.sh /path/to/drafted-handoff.md
    ```
-   It writes `HANDOFF.md` at the project root and archives a timestamped copy to `~/.claude/handoffs/`. It refuses to clutter `$HOME`: if the working dir is your home directory, it archives only and tells you.
+   It writes `HANDOFF.md` at the project root and archives a timestamped copy to your agent's handoffs dir (`~/.claude/handoffs/` on Claude Code, `~/.codex/handoffs/` on Codex; auto-detected). It refuses to clutter `$HOME`: if the working dir is your home directory, it archives only and tells you.
 6. **Tell the user** where it saved and the one-line command the next agent should start with (see the template's first section).
 
 ## What makes a handoff the next agent can actually use
@@ -58,7 +58,7 @@ Run this the first time you checkpoint, then re-run the relevant steps on each r
 | Decisions **with reasons** | Next agent won't reverse them blindly |
 | Dead ends already tried | Stops repeating your mistakes |
 | Ordered, concrete next steps | Continue, don't re-plan |
-| Suggested skills + memory entry points (`MEMORY.md`, mem-search) | Recover the "muscle memory" fast |
+| Suggested skills + your runtime's memory entry points | Recover the "muscle memory" fast |
 
 ## Common mistakes
 
@@ -67,3 +67,12 @@ Run this the first time you checkpoint, then re-run the relevant steps on each r
 - **Summarizing the vibe instead of the state** — paths, commands, and decisions beat prose.
 - **Deleting empty sections** — the next agent won't know if "no blockers" means none or forgotten. Write "N/A".
 - **Waiting until it's too late** — offer the handoff while budget remains, not at 0.
+
+## Platform notes
+
+Runs on any skill-aware agent — the `SKILL.md` format is shared. Only a few bits are runtime-specific:
+
+- **Install path** — Claude Code: `~/.claude/skills/resume-handoff/`; Codex / cross-runtime: `~/.codex/skills/` or `~/.agents/skills/`.
+- **Handoffs archive** — `save-handoff.sh` auto-picks `~/.claude/handoffs/` or `~/.codex/handoffs/` (override with `RESUME_HANDOFF_ARCHIVE_DIR`).
+- **Auto-nudge before compaction** — the optional `PreCompact` hook (`precompact-hook.sh`) is **Claude Code-specific**. On Codex or elsewhere, rely on the manual + milestone triggers (the primary path anyway).
+- **Memory entry points** — point the next agent at your runtime's memory: Claude Code auto-memory / `mem-search`; Codex `AGENTS.md`.

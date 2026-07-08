@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# PreCompact hook for the resume-handoff skill.
+# PreCompact hook for the resume-handoff skill. Claude Code-specific (Codex has no
+# direct equivalent; Codex users rely on manual + milestone handoff triggers).
 # Fires right before the conversation is compacted (context filling up), i.e. right
 # before detail gets discarded. Emits `additionalContext` — which carries across the
 # compaction boundary — nudging the model to checkpoint the handoff while full detail

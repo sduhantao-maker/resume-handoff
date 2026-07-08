@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Save a handoff doc to the project root as HANDOFF.md and archive a timestamped
-# copy to ~/.claude/handoffs/ so a fresh agent can find it later.
+# copy to your agent's handoffs dir (~/.claude/handoffs or ~/.codex/handoffs) so a
+# fresh agent can find it later. Override the dir with RESUME_HANDOFF_ARCHIVE_DIR.
 #
 # Usage:
 #   save-handoff.sh path/to/draft.md      # read content from a file
@@ -8,7 +9,16 @@
 #   save-handoff.sh -                     # read content from stdin
 set -euo pipefail
 
-ARCHIVE_DIR="$HOME/.claude/handoffs"
+# Archive dir: explicit override, else the installed runtime's dir, else ~/.handoffs.
+if [ -n "${RESUME_HANDOFF_ARCHIVE_DIR:-}" ]; then
+  ARCHIVE_DIR="$RESUME_HANDOFF_ARCHIVE_DIR"
+elif [ -d "$HOME/.claude" ]; then
+  ARCHIVE_DIR="$HOME/.claude/handoffs"
+elif [ -d "$HOME/.codex" ]; then
+  ARCHIVE_DIR="$HOME/.codex/handoffs"
+else
+  ARCHIVE_DIR="$HOME/.handoffs"
+fi
 mkdir -p "$ARCHIVE_DIR"
 
 # --- read content -----------------------------------------------------------

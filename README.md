@@ -27,18 +27,35 @@ So instead of trying to "save at the last second," this skill treats `HANDOFF.md
 
 ## Install
 
-Clone into your agent's skills directory (or clone elsewhere and symlink):
+### Quick install (Claude Code + Codex)
+
+One command — clones the repo and symlinks it into every agent skills dir it finds (`~/.claude/skills`, `~/.codex/skills`, `~/.agents/skills`):
 
 ```bash
-# Claude Code (personal skills)
-git clone https://github.com/sduhantao-maker/resume-handoff.git \
-  ~/.claude/skills/resume-handoff
-
-# or symlink an existing clone
-ln -s /path/to/resume-handoff ~/.claude/skills/resume-handoff
+curl -fsSL https://raw.githubusercontent.com/sduhantao-maker/resume-handoff/main/install.sh | bash
 ```
 
-The skill is then discoverable by name (`resume-handoff`). Codex and other cross-runtime agents also recognize `~/.agents/skills/`.
+Re-run any time to update. Then restart your agent (or reload skills).
+
+### Install by handing an agent the link
+
+Paste this to Claude Code, Codex, or any shell-capable agent:
+
+> Install this skill: https://github.com/sduhantao-maker/resume-handoff —
+> run its `install.sh`, or `curl -fsSL https://raw.githubusercontent.com/sduhantao-maker/resume-handoff/main/install.sh | bash`
+
+The agent clones the repo and links it into your skills directory.
+
+### Manual
+
+```bash
+# Claude Code
+git clone https://github.com/sduhantao-maker/resume-handoff.git ~/.claude/skills/resume-handoff
+# Codex
+git clone https://github.com/sduhantao-maker/resume-handoff.git ~/.codex/skills/resume-handoff
+```
+
+The skill is then discoverable by name (`resume-handoff`) on both runtimes.
 
 ### Optional: auto-nudge before context compaction (Claude Code)
 
